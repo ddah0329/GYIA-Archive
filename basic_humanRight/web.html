@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아동 권리 알아보기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Visualization & Content Choices:
+        - Section 1 (Welcome): Text, plus a new visual diagram representing the three pillars of children's rights protection (law, monitoring, culture of respect). Goal: Introduce and visually explain the foundational concepts. Method: HTML/Tailwind for text and diagram.
+        - Section 2 (What are Rights?): Text. Goal: Define/Clarify. Method: HTML/Tailwind.
+        - Section 3 (UNCRC): Text, key facts (e.g., 193 countries, Korea 1991). Goal: Inform about international agreement. Method: HTML/Tailwind.
+        - Section 4 (Our Rights): Interactive cards for 5 rights (Non-discrimination, Survival, Development, Protection, Participation). Goal: Detail key rights. Interaction: Click to show details. Justification: Enhances engagement with core content. Method: HTML/Tailwind, JS for interactivity.
+        - Section 5 (Let's Create Together): Scenario presentation (playground swing). Goal: Illustrate rights in practice. Interaction: Display solutions. Method: HTML/Tailwind.
+        - Section 6 (Culture of Respect): Text. Goal: Conclude/Call to action. Method: HTML/Tailwind.
+        - No charts are used as the source material is qualitative. Focus is on interactive presentation of textual and conceptual information.
+        -->
+    <style>
+        body { font-family: 'Inter', 'Noto Sans KR', sans-serif; }
+        .nav-item { transition: all 0.3s ease; }
+        .nav-item.active { color: #0EA5E9; border-bottom: 2px solid #0EA5E9; }
+        .nav-item:hover { color: #0EA5E9; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .rights-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .rights-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .rights-card .details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .rights-card.open .details {
+            max-height: 500px; 
+        }
+        .section-title-icon {
+            font-size: 2rem;
+            margin-right: 0.75rem;
+        }
+        .solution-item {
+            background-color: #F0F9FF; /* sky-100 */
+            border-left: 4px solid #0EA5E9; /* sky-500 */
+        }
+        .pillar-box {
+            background-color: #E0F2FE; /* sky-100 */
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        .pillar-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: #0EA5E9; /* sky-500 */
+        }
+        .pillar-text {
+            font-weight: 600;
+            color: #2563EB; /* blue-700 */
+            font-size: 1.125rem; /* text-lg */
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-700">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl font-bold text-sky-600">권리 이야기</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#welcome" class="nav-item px-3 py-2 rounded-md text-sm font-medium text-slate-700 active">📢 소개</a>
+                        <a href="#definition" class="nav-item px-3 py-2 rounded-md text-sm font-medium text-slate-700">⚖️ 권리란?</a>
+                        <a href="#unrcc" class="nav-item px-3 py-2 rounded-md text-sm font-medium text-slate-700">🤝 UN아동권리협약</a>
+                        <a href="#our-rights" class="nav-item px-3 py-2 rounded-md text-sm font-medium text-slate-700">👶 우리의 권리</a>
+                        <a href="#activity" class="nav-item px-3 py-2 rounded-md text-sm font-medium text-slate-700">🎭 함께 만들어요</a>
+                        <a href="#culture" class="nav-item px-3 py-2 rounded-md text-sm font-medium text-slate-700">🌱 존중 문화</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-sky-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sky-500">
+                        <span class="sr-only">메뉴 열기</span>
+                        <svg class="h-6 w-6" id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg class="h-6 w-6 hidden" id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="md:hidden hidden" id="mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="#welcome" class="nav-item mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-slate-700 active">📢 소개</a>
+                    <a href="#definition" class="nav-item mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-slate-700">⚖️ 권리란?</a>
+                    <a href="#unrcc" class="nav-item mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-slate-700">🤝 UN아동권리협약</a>
+                    <a href="#our-rights" class="nav-item mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-slate-700">👶 우리의 권리</a>
+                    <a href="#activity" class="nav-item mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-slate-700">🎭 함께 만들어요</a>
+                    <a href="#culture" class="nav-item mobile-nav-item block px-3 py-2 rounded-md text-base font-medium text-slate-700">🌱 존중 문화</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <section id="welcome" class="content-section active pt-8 pb-12">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl sm:text-4xl font-bold text-sky-600 mb-4 flex items-center justify-center"><span class="section-title-icon">📢</span>신나는 권리 이야기 시작!</h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">이곳은 우리 친구들이 아동 권리에 대해 배우고, 모두가 행복한 세상을 만드는 멋진 방법에 대해 알아보는 곳이에요.</p>
+            </div>
+            
+            <!DOCTYPE html>
+            <html lang="ko">
+            <head>
+              <meta charset="UTF-8">
+              <script src="https://cdn.tailwindcss.com"></script>
+            </head>
+            <body class="bg-white text-center p-10 font-sans space-y-8">
+                
+                <div class="flex justify-center items-start gap-8">
+
+                    <!-- 첫 번째 열 -->
+                    <div class="flex flex-col items-center gap-4">
+                        <div class="flex justify-center items-center space-x-4">
+
+                        <div class="bg-sky-100 border border-gray-400 rounded-md px-6 py-3 font-semibold text-center w-96">
+                            자동차가 안전하게 다니려면?
+                          </div>  
+                      <div class="text-2xl text-gray-500 invisible">⟷</div>
+
+                        <div class="bg-sky-100 border border-gray-400 rounded-md px-6 py-3 font-semibold text-center w-96">
+                            우리가 안전하게 다니려면?
+                          </div>
+                          </div>
+                        <!-- 첫 번째 행 -->
+                        <div class="flex justify-center items-center space-x-4">
+                            <div class="bg-white border border-gray-400 rounded-md px-4 py-3 w-96 text-center">
+                                교통 규칙 (법)
+                              </div>
+                            <div class="text-2xl text-gray-500">⟷</div>
+                            <div class="bg-white border border-gray-400 rounded-md px-4 py-3 w-96 text-center">
+                                친구들의 권리를 지켜주는 약속 (법)
+                              </div>
+                        </div>
+                        <div class="flex justify-center items-center space-x-4">
+                            <div class="bg-white border border-gray-400 rounded-md px-4 py-3 w-96 text-center">
+                                규칙을 지키는지 봐주시는 경찰 아저씨
+                            </div>
+                            <div class="text-2xl text-gray-500">⟷</div>
+                            <div class="bg-white border border-gray-400 rounded-md px-4 py-3 w-96 text-center">
+                                우리의 권리가 잘 지켜지는지 봐주시는 어른들
+                            </div>
+                        </div>
+                        <div class="flex justify-center items-center space-x-4">
+                            <div class="bg-white border border-gray-400 rounded-md px-4 py-3 w-96 text-center">
+                                규칙을 잘 지키는 마음
+                            </div>
+                            <div class="text-2xl text-gray-500">⟷</div>
+                            <div class="bg-white border border-gray-400 rounded-md px-4 py-3 w-96 text-center">
+                                서로의 권리를 아끼고 존중하는 마음
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+    
+        </section>
+
+        <section id="definition" class="content-section pt-8 pb-12">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl sm:text-4xl font-bold text-sky-600 mb-4 flex items-center justify-center"><span class="section-title-icon">⚖️</span>권리란 무엇일까요? (오해는 그만!)</h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">권리라는 말이 조금 어렵게 들릴 수도 있어요. <br>권리가 무엇인지 쉽게 알아보고, 가끔 우리가 오해할 수 있는 부분도 함께 살펴봐요!</p>
+            </div>
+            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+                <p class="mb-4 text-lg leading-relaxed">권리란 <strong>어떤 일을 하거나 어떤 것을 받을 때, '이건 당연히 내가 할 수 있는 거야!' 하고 말할 수 있는 힘이나 자격</strong>을 말해요. 예를 들어, 학교에서 공부할 권리, 친구들과 사이좋게 놀 권리처럼요.
+                    <br>
+                    <br>하지만, '내 권리만 중요해!' 하고 나만 생각하면 어떻게 될까요? 마치 운동장에서 나 혼자만 놀고 싶어서 친구들을 밀치는 것과 같을 거예요.
+                    <br>
+                    <br>그럼 모두가 불편하고 싸움이 날 수도 있겠죠?
+                    <br>
+                    <br><strong>권리는 '내 마음대로 해도 돼!' 라는 뜻이 아니에요.</strong> 나도 소중하듯이, 다른 친구들도 소중하다는 것을 기억하고 서로의 권리를 존중해야 한답니다.</p>
+
+                <div class="mt-6 p-4 bg-sky-100 border-l-4 border-sky-500 text-sky-700 rounded-md">
+                    <p class="font-semibold">⭐ 기억해요!</p>
+                    <p>나의 권리만큼 친구의 권리도 소중해요. 
+                        <br>서로의 권리를 아껴줄 때 우리는 더 즐겁게 함께 지낼 수 있어요!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="unrcc" class="content-section pt-8 pb-12">
+            <div class="text-center mb-10">
+                 <h2 class="text-3xl sm:text-4xl font-bold text-sky-600 mb-4 flex items-center justify-center"><span class="section-title-icon">🤝</span>UN아동권리협약: 전 세계 어린이들의 소중한 약속</h2>
+                 <p class="text-lg text-slate-600 max-w-2xl mx-auto">전 세계 모든 어린이 친구들이 행복하고 안전하게 자랄 수 있도록, 여러 나라들이 함께 약속한 것이 있어요. 바로 'UN아동권리협약'이랍니다!</p>
+            </div>
+            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+                <p class="mb-4 text-lg leading-relaxed">UN아동권리협약은 <strong>어린이 친구들만을 위한 아주아주 특별한 약속</strong>이에요. 
+                    <br><br>전 세계에 있는 거의 모든 나라, 무려 <strong>93개 나라</strong>가 이 약속을 지키기로 손도장을 쾅! 찍었답니다. 
+                    <br><br>우리나라도 <strong>1991년</strong>에 이 약속에 함께했어요.</p>
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                    <div class="p-4 bg-emerald-100 rounded-lg">
+                        <p class="text-3xl font-bold text-emerald-600">193개국</p>
+                        <p class="text-emerald-700">약속에 참여한 나라 수</p>
+                    </div>
+                    <div class="p-4 bg-sky-100 rounded-lg">
+                        <p class="text-3xl font-bold text-sky-600">1991년</p>
+                        <p class="text-sky-700">우리나라가 약속한 해</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="our-rights" class="content-section pt-8 pb-12">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl sm:text-4xl font-bold text-sky-600 mb-4 flex items-center justify-center"><span class="section-title-icon">👶</span>우리 친구들의 소중한 권리 5가지!</h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">UN에서는 몇 살까지를 '어린이'라고 부를까요? 그리고 우리 친구들이 꼭 누려야 할 아주 중요한 권리 5가지를 함께 알아봐요!</p>
+            </div>
+            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg mb-8">
+                <p class="text-lg leading-relaxed">UN에서는 <strong>만 18세가 되기 전까지의 모든 사람을 '어린이'</strong>라고 불러요. 그러니까 아직 18살이 안 된 우리 친구들은 모두 유엔아동권리협약이 지켜주는 소중한 권리들을 가지고 있답니다!</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="rights-card" data-right="non-discrimination">
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">1. 차별받지 않을 권리</h3>
+                    <p class="text-slate-600">모든 친구는 똑같이 소중해요!</p>
+                    <div class="details mt-3 pt-3 border-t border-slate-200">
+                        <p class="text-sm text-slate-500 leading-relaxed">남자든 여자든, 피부색이 다르든, 어느 나라에서 왔든, 어떤 종교를 믿든, 몸이 조금 불편하든, 부모님이 누구든 상관없이 모든 어린이는 똑같이 존중받아야 해요. 누구도 차별받지 않고, 모두에게 똑같은 기회가 주어져야 한답니다.</p>
+                    </div>
+                </div>
+                <div class="rights-card" data-right="survival">
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">2. 잘 살 권리 (생존권)</h3>
+                    <p class="text-slate-600">건강하게 지내고 아프지 않을 권리!</p>
+                    <div class="details mt-3 pt-3 border-t border-slate-200">
+                        <p class="text-sm text-slate-500 leading-relaxed">모든 어린이는 맛있는 음식과 깨끗한 물을 마시고, 따뜻한 집에서 지내며, 아플 때 병원에서 치료받을 권리가 있어요. 건강하게 잘 살 수 있도록 필요한 모든 것을 받을 수 있어야 해요.</p>
+                    </div>
+                </div>
+                 <div class="rights-card" data-right="development">
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">3. 잘 자랄 권리 (발달권)</h3>
+                    <p class="text-slate-600">꿈을 키우고 똑똑해질 권리!</p>
+                    <div class="details mt-3 pt-3 border-t border-slate-200">
+                        <p class="text-sm text-slate-500 leading-relaxed">모든 어린이는 학교에 가서 공부하고, 신나게 뛰어 놀고, 그림을 그리거나 노래를 부르는 등 다양한 활동을 하면서 자신의 재능을 키울 권리가 있어요. 몸도 마음도 쑥쑥 자랄 수 있도록 도와줘야 해요.</p>
+                    </div>
+                </div>
+                <div class="rights-card" data-right="protection">
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">4. 보호받을 권리 (보호권)</h3>
+                    <p class="text-slate-600">위험한 일로부터 안전하게 지켜질 권리!</p>
+                    <div class="details mt-3 pt-3 border-t border-slate-200">
+                        <p class="text-sm text-slate-500 leading-relaxed">모든 어린이는 맞거나 괴롭힘을 당하거나, 위험한 곳에 혼자 버려지는 일 없이 안전하게 보호받아야 해요. 전쟁이나 큰 재난이 생겼을 때도 어린이가 가장 먼저 도움을 받아야 한답니다.</p>
+                    </div>
+                </div>
+                <div class="rights-card" data-right="participation">
+                    <h3 class="text-xl font-semibold text-emerald-600 mb-2">5. 참여할 권리 (참여권)</h3>
+                    <p class="text-slate-600">내 생각을 말하고 존중받을 권리!</p>
+                    <div class="details mt-3 pt-3 border-t border-slate-200">
+                        <p class="text-sm text-slate-500 leading-relaxed">어린이도 자기에게 중요한 일에 대해 자유롭게 자기 생각을 말할 수 있어야 해요. 어른들은 어린이의 의견을 '아직 어려서 몰라' 하고 무시하지 않고, 귀 기울여 듣고 존중해줘야 한답니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="activity" class="content-section pt-8 pb-12">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl sm:text-4xl font-bold text-sky-600 mb-4 flex items-center justify-center"><span class="section-title-icon">🎭</span>4컷 만화 활동: 권리 존중 대작전!</h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">우리 주변에서 일어날 수 있는 일을 통해 권리를 어떻게 존중해야 할지 함께 생각해봐요! 놀이터에서 그네를 타고 싶은 친구들의 이야기를 살펴볼까요?</p>
+            </div>
+            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold text-slate-800 mb-4">놀이터 그네 이야기 🎢</h3>
+                <p class="mb-4 text-lg leading-relaxed">세 명의 친구가 신나게 놀이터에 갔는데, 그네는 두 개뿐이었어요. 모두 그네를 타고 싶어 했죠. 이런 상황에서 어떻게 하면 친구들 모두의 권리를 존중하면서 신나게 놀 수 있을까요?</p>
+                
+                <div class="mt-6">
+                    <h4 class="text-xl font-semibold text-emerald-600 mb-3">친구들의 멋진 해결 아이디어들:</h4>
+                    <ul class="space-y-3">
+                        <li class="p-4 rounded-md solution-item">
+                            <p class="font-medium text-slate-700">💡 순서를 정해서 타요!</p>
+                            <p class="text-sm text-slate-600 mt-1">가위바위보를 하거나, 차례를 정해서 약속한 시간만큼 번갈아 타는 거예요. 모두가 그네를 탈 기회를 가질 수 있어요.</p>
+                        </li>
+                        <li class="p-4 rounded-md solution-item">
+                            <p class="font-medium text-slate-700">💡 서로 밀어주며 함께 놀아요!</p>
+                            <p class="text-sm text-slate-600 mt-1">한 명이 그네를 탈 때 다른 친구가 뒤에서 밀어주면서 함께 즐거움을 나누는 방법도 있어요.</p>
+                        </li>
+                        <li class="p-4 rounded-md solution-item">
+                            <p class="font-medium text-slate-700">💡 새로운 놀이를 만들어요!</p>
+                            <p class="text-sm text-slate-600 mt-1">그네 말고도 놀이터에는 미끄럼틀, 시소, 모래밭 등 재미있는 곳이 많아요. 함께 새로운 놀이를 찾아보는 것도 좋아요.</p>
+                        </li>
+                        <li class="p-4 rounded-md solution-item">
+                            <p class="font-medium text-slate-700">💡 어른들에게 그네를 더 만들어 달라고 이야기해요!</p>
+                            <p class="text-sm text-slate-600 mt-1">놀이터를 관리하는 어른들이나 부모님께 '그네가 더 필요해요!' 하고 우리들의 의견을 말하는 거예요. (이게 바로 '참여할 권리'를 쓰는 멋진 방법!)</p>
+                        </li>
+                    </ul>
+                </div>
+                <p class="mt-6 text-lg leading-relaxed">어때요? 친구들은 서로의 마음을 생각하며 멋진 방법들을 찾아냈어요. 이처럼 우리도 생활 속에서 친구들의 권리를 존중하고, 함께 행복해질 수 있는 방법을 찾을 수 있답니다!</p>
+            </div>
+        </section>
+
+        <section id="culture" class="content-section pt-8 pb-12">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl sm:text-4xl font-bold text-sky-600 mb-4 flex items-center justify-center"><span class="section-title-icon">🌱</span>함께 만들어가는 소중한 권리 존중 문화</h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">권리는 우리 모두의 이야기예요. 서로를 아끼고 존중하는 마음이 모여 더 멋진 세상을 만들 수 있답니다. 우리가 함께 만들어갈 권리 존중 문화에 대해 생각해봐요!</p>
+            </div>
+            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+                <p class="mb-4 text-lg leading-relaxed"><strong>권리는 바로 우리 친구들의 매일매일 생활 속에 숨어 있는 소중한 보물</strong>과 같아요. 
+                    <br>하지만 '내 권리만 최고!'라고 주장하면 안 되겠죠?</p>
+                <p class="mb-4 text-lg leading-relaxed">가장 중요한 건 우리 모두가 서로를 <strong>존중</strong>하고, 누구도 '너는 달라!' 하면서 <strong>차별받지 않도록</strong> 하는 거예요.</p>
+                <p class="mb-4 text-lg leading-relaxed"><strong>친구들의 권리를 아끼고 존중하는 문화를 만드는 건 우리 모두의 멋진 역할</strong>이에요. 
+                    <br><br>옆에 있는 친구가 나와 조금 다르다고 해서 놀리거나 따돌리지 않고, <br><br>어떻게 하면 이 친구와 함께 즐겁게 지낼 수 있을까?' 하고 고민하는 마음이 필요해요. 
+                    <br><br>서로의 다름을 이해하고 아껴주는 마음이 바로 권리 존중 문화의 첫걸음이랍니다!</p>
+                <div class="mt-8 p-6 bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 rounded-lg">
+                    <p class="text-xl font-semibold mb-2">✨ 우리 친구들의 약속:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>모든 친구는 특별하고 소중하다는 것을 기억할 거예요.</li>
+                        <li>나와 다른 친구의 생각과 이야기에 귀 기울일 거예요.</li>
+                        <li>어려운 친구를 보면 도와주고, 함께 해결 방법을 찾을 거예요.</li>
+                        <li>누구도 차별받지 않는 멋진 세상을 만들기 위해 노력할 거예요.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 py-8 text-center">
+        <p>&copy; 2024 아동 권리 알아보기. 국제아동인권센터 자료 기반.</p>
+        <p class="text-sm mt-1">본 페이지는 교육적 목적으로 제작되었습니다.</p>
+    </footer>
+
+    <script>
+        const navLinks = document.querySelectorAll('.nav-item');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-item');
+        const contentSections = document.querySelectorAll('.content-section');
+        const rightsCards = document.querySelectorAll('.rights-card');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconOpen = document.getElementById('menu-icon-open');
+        const menuIconClose = document.getElementById('menu-icon-close');
+
+        function setActiveSection(targetId) {
+            contentSections.forEach(section => {
+                if (section.id === targetId) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === '#' + targetId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            mobileNavLinks.forEach(link => {
+                 if (link.getAttribute('href') === '#' + targetId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        function handleNavClick(event, links) {
+            event.preventDefault();
+            const targetId = event.currentTarget.getAttribute('href').substring(1);
+            setActiveSection(targetId);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (mobileMenu.classList.contains('hidden') === false) {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+            }
+        }
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => handleNavClick(e, navLinks));
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => handleNavClick(e, mobileNavLinks));
+        });
+        
+        rightsCards.forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('open');
+            });
+        });
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuIconOpen.classList.toggle('hidden');
+            menuIconClose.classList.toggle('hidden');
+        });
+
+        // Set initial active section based on hash or default to 'welcome'
+        const initialTargetId = window.location.hash ? window.location.hash.substring(1) : 'welcome';
+        setActiveSection(initialTargetId);
+
+        // Handle back/forward navigation
+        window.addEventListener('popstate', () => {
+            const targetId = window.location.hash ? window.location.hash.substring(1) : 'welcome';
+            setActiveSection(targetId);
+        });
+
+    </script>
+</body>
+</html>
