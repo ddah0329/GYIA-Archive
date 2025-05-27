@@ -163,13 +163,34 @@
                 font-size: 1rem;
             }
         }
+        /* Home Button Style */
+.home-button {
+    position: fixed; /* Fixed position relative to the viewport */
+    top: 20px; /* 20px from the top */
+    left: 20px; /* 20px from the left */
+    background-color: #faf5f5; /* Cheerful red */
+    color: #e65c5c;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-family: 'Jua', sans-serif;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 100; /* Ensure it's above other content */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    letter-spacing: 0.05em;
+}
+.home-button:hover {
+    color: white; /* Darker red on hover */
+    transform: translateY(-2px);
+}
     </style>
 </head>
 <body>
     <div class="quiz-container">
-        <a href="/index.html" class="flex justify-between items-center inline-block text-black px-4 py-2 rounded-md hover:bg-gray-50 transition">
-            ← 돌아가기
-        </a>
+        <button class="home-button" onclick="window.location.href='/index.html'">🏠 홈</button>
+
         <h1 class="text-3xl font-extrabold text-blue-800 mb-6">초등학교 5학년 인권 퀴즈</h1>
         
         <div class="question-box" id="question-box">
