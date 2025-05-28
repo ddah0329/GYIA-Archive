@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인권 교육 자료</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+        /* CSS will be here */
+        body {
+            font-family: 'Jua', 'Malgun Gothic', sans-serif; /* Apply Jua font */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #fcf8f0; /* Soft cream background */
+            color: #4a4a4a; /* Darker grey for readability */
+            overflow: hidden;
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="%23e0e0e0" opacity="0.3"/></svg>'); /* Subtle dot pattern */
+            background-size: 20px 20px;
+        }
+        .slideshow-container {
+            background-color: #ffffff; /* Pure white for content */
+            border-radius: 25px; /* More rounded corners */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* Softer, larger shadow */
+            width: 81%; /* Reduced by 10% from 90% (90 * 0.9 = 81) */
+            max-width: 1170px; /* Reduced by 10% from 1300px (1300 * 0.9 = 1170) */
+            padding: 40px; /* More padding */
+            box-sizing: border-box;
+            position: relative;
+            text-align: center;
+            height: 750px; /* Fixed height for consistency across all slides */
+            max-height: 750px; /* Fixed maximum height for consistency */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden; /* Ensures content inside doesn't overflow container */
+            border: 3px solid #ffe0b2; /* A cute border */
+        }
+        .slide {
+            display: none;
+            padding: 15px; /* Adjusted padding */
+            flex-grow: 1; /* Allows slide to take available space within container */
+            text-align: left;
+            overflow-y: auto; /* Adds scrollbar if content overflows vertically */
+            max-height: 100%; /* Ensures slide content doesn't exceed container height */
+            animation: fadeIn 0.8s ease-out; /* Fade in animation */
+        }
+        .slide.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #ff6b6b; /* Cheerful red */
+            font-size: 3.7em;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            letter-spacing: 0.085em; /* 자간 3번 넓힘 */
+        }
+        h2 {
+            color: #4ecdc4; /* Soft teal */
+            font-size: 2.6em;
+            margin-top: 25px;
+            margin-bottom: 20px;
+            letter-spacing: 0.075em; /* 자간 3번 넓힘 */
+        }
+        h3 {
+            color: #feca57; /* Warm yellow/orange */
+            font-size: 2.0em;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            letter-spacing: 0.065em; /* 자간 3번 넓힘 */
+        }
+        p {
+            font-size: 1.5em;
+            line-height: 1.6;
+            letter-spacing: 0.065em; /* 자간 3번 넓힘 */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        ul li {
+            background-color: #e0f7fa; /* Light blue for list items */
+            margin-bottom: 12px;
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-size: 1.5em;
+            text-align: left;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+            letter-spacing: 0.065em; /* 자간 3번 넓힘 */
+        }
+        ul li:hover {
+            transform: translateY(-3px);
+        }
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        .navigation-buttons button {
+            background-color: #ff9f1c; /* Vibrant orange */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.6em;
+            font-family: 'Jua', sans-serif;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.085em; /* 자간 3번 넓힘 */
+        }
+        .navigation-buttons button:hover {
+            background-color: #ffbf69; /* Lighter orange on hover */
+            transform: translateY(-3px);
+        }
+        .navigation-buttons button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+        .youtube-video {
+            margin-bottom: 20px;
+        }
+        .youtube-video iframe {
+            width: 100%;
+            height: 350px; /* Increased height for videos */
+            border-radius: 15px;
+            border: 3px solid #a2d2ff; /* Cute blue border */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .activity-description {
+            background-color: #fffacd; /* Lemon Chiffon */
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+            border: 2px dashed #ffb347; /* Orange dashed border */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        .activity-description ul li {
+            background-color: transparent; /* Remove background for nested list */
+            padding: 5px 0;
+            box-shadow: none;
+            margin-bottom: 5px;
+            font-size: 1.5em;
+            letter-spacing: 0.065em; /* 자간 3번 넓힘 */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px; /* Rounded images */
+            margin-top: 25px;
+        }
+
+        /* Flip Card Specific Styles */
+        .flip-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Responsive grid */
+            gap: 20px;
+            margin-top: 30px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 200px; /* Fixed height for cards */
+            perspective: 1000px; /* 3D perspective */
+            cursor: pointer;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for cards */
+            position: relative; /* For positioning delete button */
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s; /* Smooth flip transition */
+            transform-style: preserve-3d;
+            border-radius: 15px;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Hide the back of the card on flip */
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 1.2em; /* Base font size for flip card content */
+            letter-spacing: 0.055em; /* 자간 3번 넓힘 */
+            line-height: 1.4;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden; /* Ensure text doesn't overflow before adjustment */
+        }
+        .flip-card-front {
+            background-color: #ffdddd; /* Light pink for front */
+            color: #ff6b6b;
+            border: 2px solid #ff9999;
+            font-weight: bold;
+        }
+        .flip-card-back {
+            background-color: #d0f0c0; /* Light green for back */
+            color: #4CAF50;
+            border: 2px solid #8BC34A;
+            transform: rotateY(180deg);
+            font-size: 1.0em; /* Base font size for back, will be adjusted */
+        }
+
+        /* Delete Button for Flip Cards */
+        .delete-card-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10; /* Ensure it's above the card content */
+            transition: background-color 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .delete-card-btn:hover {
+            background-color: #e65c5c;
+        }
+
+        /* Styles for adding new flip cards */
+        .add-card-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f0f8ff; /* Light blue background */
+            border-radius: 15px;
+            border: 2px dashed #a2d2ff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        .add-card-section input[type="text"] {
+            width: calc(100% - 40px); /* Adjust width for padding */
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #a2d2ff;
+            border-radius: 10px;
+            font-family: 'Jua', sans-serif;
+            font-size: 1.1em;
+            box-sizing: border-box; /* Include padding in width */
+        }
+        .add-card-section button {
+            background-color: #8bc34a; /* Green button */
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-family: 'Jua', sans-serif;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        .add-card-section button:hover {
+            background-color: #9ccc65; /* Lighter green on hover */
+            transform: translateY(-2px);
+        }
+
+        /* Reverted and improved styles for social disability examples */
+        .social-disability-examples {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f7f7f7;
+            border-radius: 10px;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+        }
+        .example-item {
+            flex: 1;
+            min-width: 250px;
+            max-width: 45%;
+            background-color: #fefefe;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .example-item p {
+            margin: 8px 0;
+            font-size: 1.3em;
+            line-height: 1.5;
+            letter-spacing: 0.05em;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+        .example-item p:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        .example-item p:first-child {
+            font-weight: bold;
+            color: #6a5acd;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .concept-list {
+            list-style-type: '💡 ';
+            padding-left: 25px;
+            margin-top: 15px;
+        }
+        .concept-list li {
+            background-color: #fef8e0;
+            border: 1px solid #ffe0b2;
+            font-size: 1.4em;
+            padding: 10px 20px;
+            margin-bottom: 8px;
+        }
+
+        /* Action list styles */
+        .action-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f7f7f7;
+            border-radius: 10px;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+        }
+        .action-item {
+            flex: 1;
+            min-width: 250px;
+            max-width: 45%;
+            background-color: #fefefe;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .action-item p {
+            margin: 8px 0;
+            font-size: 1.3em;
+            line-height: 1.5;
+            letter-spacing: 0.05em;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+        .action-item p:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        .action-item p:first-child {
+            font-weight: bold;
+            color: #6a5acd;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        /* New styles for Rules Cards */
+        .rules-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .rule-card {
+            background-color: #e0f7fa;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 1.4em;
+            line-height: 1.6;
+            letter-spacing: 0.06em;
+            border: 2px solid #a2d2ff;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .rule-card:hover {
+            transform: translateY(-5px);
+            background-color: #d4effc;
+        }
+        .rule-card::before {
+            content: '✨';
+            display: block;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        /* Home Button Style */
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #faf5f5;
+            color: #e65c5c;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-family: 'Jua', sans-serif;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            letter-spacing: 0.05em;
+        }
+        .home-button:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .teacher-section {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .teacher-intro {
+            position: relative;
+            background-color: #fffbe7;
+            border: 2px solid #f2d675;
+            padding: 20px 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 800px;
+            color: #333;
+        }
+
+        .teacher-intro::after {
+            content: "";
+            position: absolute;
+            top: 40px;
+            right: -20px;
+            width: 0;
+            height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-left: 20px solid #f6edc2;
+        }
+
+        .teacher-intro::before {
+            content: "";
+            position: absolute;
+            top: 39px;
+            right: -22px;
+            width: 0;
+            height: 0;
+            border-top: 13px solid transparent;
+            border-bottom: 13px solid transparent;
+            border-left: 22px solid #f2d675;
+            z-index: -1;
+        }
+
+        .teacher-image {
+            width: 300px;
+            height: auto;
+        }
+
+        /* Slide Navigation Dots */
+        .slide-nav-dots {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+            z-index: 50;
+        }
+        .slide-dot {
+            width: 30px;
+            height: 30px;
+            background-color: #a2d2ff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Jua', sans-serif;
+            font-size: 1em;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .slide-dot:hover {
+            background-color: #79c8e8;
+            transform: scale(1.1);
+        }
+        .slide-dot.active-dot {
+            background-color: #4ecdc4;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transform: scale(1.2);
+        }
+
+        /* New style for centered images in slide 12 */
+        .centered-images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Space between images */
+            margin-top: 25px; /* Adjust as needed */
+        }
+        .centered-images img {
+            max-width: 45%; /* Adjusted to be 10% smaller relative to the container */
+            height: auto;
+            border-radius: 15px;
+        }
+
+        /* Styles for cover-up text */
+        .cover-up-word {
+            background-color: #ffcc00; /* Yellow background to cover text */
+            color: #ffcc00; /* Text color same as background to hide it */
+            cursor: pointer;
+            padding: 2px 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .cover-up-word.revealed {
+            background-color: transparent; /* Transparent background when revealed */
+            color: #4a4a4a; /* Normal text color when revealed */
+        }
+
+        /* Table for legal definition */
+        .definition-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 1.4em;
+        }
+        .definition-table th, .definition-table td {
+            border: 2px solid #a2d2ff;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px; /* Rounded corners for cells */
+        }
+        .definition-table th {
+            background-color: #e0f7fa;
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+        .definition-table td {
+            background-color: #f0f8ff;
+            color: #4a4a4a;
+        }
+
+        /* Styles for the new grid of boxes in slide 17 */
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            gap: 15px; /* Space between boxes */
+            margin-top: 30px;
+            text-align: center;
+        }
+        .location-box {
+            background-color: #e6f7ff; /* Light blue background for boxes */
+            border: 2px solid #a2d2ff;
+            border-radius: 15px;
+            padding: 20px;
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #4a4a4a;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100px; /* Ensure a minimum height for boxes */
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .location-box:hover {
+            transform: translateY(-5px);
+            background-color: #d4effc;
+        }
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="window.location.href='/index.html'">🏠 홈</button>
+    <div class="slideshow-container">
+        <div class="slide-nav-dots" id="slideNavDots"></div>
+        <div class="slide active" id="slide1">
+            <h1>지금 우리 학교는</h1>
+            <p>모두가 행복한 학교를 만들기!</p>
+            <img src="assets\main.png" alt="행복한 학교 이미지">
+        </div>
+
+        <div class="slide" id="slide2">
+            <h2>선생님 소개</h2>
+            <div class="teacher-section">
+                <div class="teacher-intro">
+                  <p>안녕하세요, 여러분과 오늘 총 2교시 동안 함께 공부할 
+                    <br><strong>마다현 선생님</strong>이라고 합니다!</p>
+                  <p>오늘 여러분과 함께 <strong>우리 학교를 더욱더 좋은 곳으로 만드는 방법</strong>에 대해 고민하려고 하는데 준비됐나요?</p>
+                </div>
+            
+                <img src="assets\teacher.png" alt="선생님 이미지" class="teacher-image">
+              </div>
+        </div>
+
+        <div class="slide" id="slide3">
+            <h2>다함께 읽어볼까요?</h2>
+            <ul>
+                <li>1️⃣ 장애의 다양한 형태를 이해하기</li>
+                <li>2️⃣ 서로의 입장을 이해하고 배려하기</li>
+                <li>3️⃣ 모두가 자유롭게 이동하고 이용용할 수 있는 환경 찾아보기</li>
+            </ul>
+            <p style="margin-top: 20px;">이 세 가지 목표를 기억하면서 함께 재미있는 활동들을 해봐요!</p>
+        </div>
+
+        <div class="slide" id="slide4">
+            <h2>장애는 무엇인가요?</h2>
+            <table class="definition-table">
+                <thead>
+                    <tr>
+                        <th>장애의 법률적 정의</th>
+                        <th>몸이나 마음이 불편해서 생활하기 어려운 점이 있는 상태로 일상생활 또는 사회생활에 힘듬을 겪는 상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+            <p style="margin-top: 20px;">장애는 <span class="cover-up-word">나</span>에게도 찾아올 수 있으며, 우리 주변에 다양한 모습으로 존재해요.</p>
+            <p style="margin-top: 10px;">장애는 <span class="cover-up-word">몸</span>이나 <span class="cover-up-word">마음</span>이 불편해서 생활하기 어려운 점이 있는 상태를 말해요.</p>
+        </div>
+
+        <div class="slide" id="slide5">
+            <h2>여러분이 아는 장애의 종류를 말해봅시다!</h2>
+            <p style="margin-bottom: 20px;">카드를 추가해서 어떤 장애들이 있는지 알아볼까요?</p>
+            <div class="flip-card-grid" id="flipCardGrid">
+                <div class="flip-card">
+                    <div class="flip-card-inner" onclick="this.parentElement.classList.toggle('flipped')">
+                        <div class="flip-card-front">
+                            <p>시각장애</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <p>눈이 잘 보이지 않아 생활에 어려움을 겪어요.</p>
+                        </div>
+                    </div>
+                    <button class="delete-card-btn" onclick="deleteFlipCard(this.parentElement, event)">X</button>
+                </div>
+            </div>
+
+            <div class="add-card-section">
+                <h3>새로운 카드 추가하기</h3>
+                <input type="text" id="frontContent" placeholder="앞면: 어떤 종류의 장애가 있는지 입력해 주세요">
+                <input type="text" id="backContent" placeholder="뒷면: 어떤 어려움이 있는지 입력해 주세요">
+                <button onclick="addFlipCard()">카드 추가하기</button>
+            </div>
+        </div>
+
+        <div class="slide" id="slide7">
+            <h2>시청각 활동: 함께 영상을 볼까요?</h2>
+            <div class="youtube-video">
+                <h3>청각장애인이 인공와우로 듣는 소리</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/lxZsn3cwdAU?si=cyk10PCu_oxLbNUX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="slide" id="slide8">
+            <h2>시청각 활동: 함께 영상을 볼까요?</h2>
+            <div class="youtube-video">
+                <h3>시각장애인인 내가 보는 실제 세상 모습</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/z-AzkKB8aG4?si=gCND0Kp1QUPK3Ejk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="slide" id="slide9">
+            <h2>시청각 활동: 함께 영상을 볼까요?</h2>
+            <div class="youtube-video">
+                <h3>휠체어 타고 식당 가려는데… 충격!</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/WAQwnYWAKOk?si=X0kG9Tnmrb8Fsml1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="slide" id="slide10">
+            <h2>학교를 가보자!</h2>
+            <p>우리 함께 <strong>학교로 등교하는 길</strong>을 상상해볼까요?</p>
+            <img src="assets\homeToSchool_1.png" alt="등굣길 일러스트 이미지">
+        </div>
+
+        <div class="slide" id="slide11">
+            <h2>우리 동네에서 특별하게 보였던 시설들이 있는지?</h2>
+            <p>학교 주변이나 우리 동네를 다니다가 <strong>'이런 건 왜 있을까?'</strong> 하고 생각했던 시설들이 있나요?</p>
+            <p>예를 들어, 길의 울퉁불퉁한 블록이나, 계단 옆에 있는 경사로 같은 것들이요.</p>
+            <p>그것들이 어떤 역할을 하는지 함께 이야기해볼까요?</p>
+        </div>
+
+        <div class="slide" id="slide12">
+            <h2>퀴즈! 이것은 무엇일까요!</h2>
+            <div class="centered-images">
+                <img src="assets\block_goStop.png" alt="점자블록 멈춤 이미지">
+                <img src="assets\block_goStraight.png" alt="점자블록 직진 이미지">
+            </div>
+            <p style="text-align: center; margin-top: 20px; font-size: 1.8em; font-weight: bold; color: #4ecdc4;"><span class="cover-up-word">점자 블록</span></p>
+        </div>
+
+        <!-- <div class="slide" id="slide13"> -->
+            
+        
+        <div class="slide" id="slide14_braille_video">
+            <h2>점자 블록에 대한 영상</h2>
+            <div class="youtube-video">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/6NDYAe4mDAQ?si=yFP7kI5DdKwaZ3q0&start=15" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="slide" id="slide16_social_disability">
+            <h2>사회적 장애가 무엇인가요?</h2>
+            <p><strong>장애는 몸이 불편한 것만이 아니라, 사람들이 배려하지 않아서 생기는 불편도 있어요.</strong></p>
+            <p style="margin-top: 20px;">예를 들면:</p>
+
+            <div class="social-disability-examples">
+                <div class="example-item">
+                    <p><strong>개인의 상태 (손상)</strong></p>
+                    <p>청각장애</p>
+                    <p>시각장애</p>
+                    <p>지체장애 (휠체어 사용자 등)</p>
+                    <p>자폐성 장애</p>
+                    <p>정신장애</p>
+                </div>
+                <div class="example-item">
+                    <p><strong>사회적 장애 요인 (환경)</strong></p>
+                    <p>자막 없는 영상, 수어 통역 없음</p>
+                    <p>점자, 음성 안내 없음</p>
+                    <p>엘리베이터 없음, 턱이 있는 건물</p>
+                    <p>소음 많은 환경, 복잡한 건물 설계</p>
+                    <p>편견과 낙인, 고용 차별</p>
+                </div>
+            </div>
+
+            <p>이렇게 환경이나 사회가 도와주지 않을 때 생기는 어려움이 바로 <strong>사회적 장애</strong>입니다.</p>
+            <p style="margin-top: 15px;">"우리 모두는 퍼즐 조각이에요. 모양이 다 달라도 함께 있을 때 그림이 완성됩니다."</p>
+        </div>
+
+        <div class="slide" id="slide17_social_actions">
+            <h2>우리가 할 수 있는 사회적 실천:</h2>
+            <p style="margin-top: 20px;">우리 친구들도 주변의 불편함을 줄여줄 수 있는 멋진 일들을 할 수 있어요!</p>
+            <div class="action-list">
+                <div class="action-item">
+                    <p><strong>할 수 있는 일</strong></p>
+                    <p>"휠체어 탄 친구가 올 때 도와줄 수 있어요."</p>
+                    <p>"말이 느린 친구 말 끝까지 들어주기"</p>
+                    <p>"수어는 손으로 하는 말이에요."</p>
+                    <p>"장애인도 똑같은 사람이에요."</p>
+                </div>
+            </div>
+            <p style="margin-top: 20px;">"장애는 단지 몸이나 마음의 문제가 아니라, 우리가 함께 도우면 없어질 수도 있는 불편이에요."</p>
+        </div>
+
+        <div class="slide" id="slide15_school_experience">
+            <h2>서초구 방일초등학교에서 생활하면서 힘들거나 불편한 점이 있었나요?</h2>
+            <p>우리 방일초등학교에서 생활하면서, 혹시 이런 점은 좀 더 편리했으면 좋겠다, 혹은 불편하다고 느꼈던 곳이 있었나요?</p>
+            <p>화장실, 교실 문, 운동장, 복도 등 어디든 좋아요!</p>
+        </div>
+
+        <div class="slide" id="slide18">
+            <h2>우리 모두가 존중받을 수 있는 학교를 그려봅시다.</h2>
+            <div class="activity-description">
+                <h3>조별 활동 안내</h3>
+                <ul>
+                    <li><strong>조별로</strong> 모둠을 만들어 주세요.</li>
+                    <li>우리 학교의 <strong>시설</strong>들을 떠올려 보세요.</li>
+                    <li>모두가 편하게 생활할 수 있도록 어떤 <strong>아이디어</strong>가 있을까요?</li>
+                    <li>생각한 아이디어를 <strong>그림으로</strong> 자유롭게 표현해 보세요!</li>
+                </ul>
+            </div>
+            <div class="location-grid">
+                <div class="location-box">도서관</div>
+                <div class="location-box">화장실</div>
+                <div class="location-box">컴퓨터실</div>
+                <div class="location-box">체육관</div>
+                <div class="location-box">과학실</div>
+                <div class="location-box">우리반</div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide19">
+            <h2>활동 규칙 설명</h2>
+            <p style="margin-bottom: 20px;">조별 활동을 시작하기 전에 몇 가지 규칙을 알아볼까요?</p>
+            <div class="rules-card-grid">
+                <div class="rule-card">
+                    모둠원 모두 <strong>자유롭게 의견을 말해요.</strong>
+                </div>
+                <div class="rule-card">
+                    다른 친구의 의견을 <strong>경청하고 존중해요.</strong>
+                </div>
+                <div class="rule-card">
+                    서로 <strong>도움을 주고받으며</strong> 함께 활동해요.
+                </div>
+                <div class="rule-card">
+                    <strong>정해진 시간</strong> 안에 그림을 완성할 수 있도록 노력해요.
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide20">
+            <h2>정리</h2>
+            <p>오늘 우리는 <strong>장애</strong>에 대해 배우고, <strong>인권</strong>이 무엇인지 알아보았어요.</p>
+            <p>그리고 영상을 통해 다양한 친구들의 어려움을 이해하고, 우리 학교가 <strong>모두에게 더 좋은 공간</strong>이 되기 위해 어떤 노력들이 필요한지 함께 고민했어요.</p>
+            <p>오늘 배운 것을 바탕으로 앞으로 친구들을 더욱 배려하고 존중하는 멋진 방일초 어린이가 되기를 바랍니다!</p>
+        </div>
+
+        <div class="navigation-buttons">
+            <button onclick="prevSlide()" id="prevBtn">이전</button>
+            <button onclick="nextSlide()" id="nextBtn">다음</button>
+        </div>
+    </div>
+    <script>
+        // JavaScript will be here
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length; 
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideNavDotsContainer = document.getElementById('slideNavDots');
+
+        // Function to adjust font size to fit content
+        function adjustFontSize(element) {
+            const container = element.parentElement; // The .flip-card-back div
+            let fontSize = parseFloat(window.getComputedStyle(element).fontSize);
+            const minFontSize = 0.8; // Minimum font size in em
+
+            // Reset font size to default for recalculation
+            element.style.fontSize = '1.0em'; // Base font size for flip-card-back
+
+            // Loop to reduce font size until content fits
+            while (element.scrollHeight > container.clientHeight && fontSize > minFontSize) {
+                fontSize -= 0.05; // Decrease by 0.05em for finer control
+                element.style.fontSize = `${fontSize}em`;
+            }
+        }
+
+        // Function to show slide and adjust font sizes for flip cards
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                    // If it's slide 5 (index 4), adjust flip card font sizes
+                    if (slide.id === 'slide5') {
+                        const flipCardBacks = slide.querySelectorAll('.flip-card-back p');
+                        flipCardBacks.forEach(pTag => {
+                            adjustFontSize(pTag);
+                        });
+                    }
+                    // If it's slide 4 (index 3) or slide 12 (index 11), add event listeners for cover-up words
+                    if (slide.id === 'slide4' || slide.id === 'slide12') {
+                        const coverUpWords = slide.querySelectorAll('.cover-up-word');
+                        coverUpWords.forEach(word => {
+                            // Remove existing listener to prevent duplicates
+                            word.removeEventListener('click', toggleCoverUp);
+                            word.addEventListener('click', toggleCoverUp);
+                        });
+                    }
+                }
+            });
+            currentSlide = index; // Update currentSlide to reflect the navigated slide
+            updateButtons();
+            updateSlideDots(); // Update dots when slide changes
+        }
+
+        // Function to toggle cover-up word visibility
+        function toggleCoverUp() {
+            this.classList.toggle('revealed');
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        function updateButtons() {
+            prevBtn.disabled = (currentSlide === 0);
+            nextBtn.disabled = (currentSlide === totalSlides - 1);
+        }
+
+        // Function to add a new flip card
+        function addFlipCard() {
+            const frontContent = document.getElementById('frontContent').value;
+            const backContent = document.getElementById('backContent').value; 
+            const flipCardGrid = document.getElementById('flipCardGrid');
+
+            if (frontContent.trim() === '') { 
+                const messageBox = document.createElement('div');
+                messageBox.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: #ffcccc;
+                    border: 2px solid #ff6666;
+                    padding: 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                    z-index: 1000;
+                    font-family: 'Jua', sans-serif;
+                    font-size: 1.2em;
+                    color: #cc0000;
+                `;
+                messageBox.textContent = '카드의 앞면 내용을 입력해주세요!';
+                document.body.appendChild(messageBox);
+
+                setTimeout(() => {
+                    messageBox.remove();
+                }, 2000);
+                return;
+            }
+
+            const newFlipCardHtml = `
+                <div class="flip-card">
+                    <div class="flip-card-inner" onclick="this.parentElement.classList.toggle('flipped')">
+                        <div class="flip-card-front">
+                            <p>${frontContent}</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <p>${backContent}</p>
+                        </div>
+                    </div>
+                    <button class="delete-card-btn" onclick="deleteFlipCard(this.parentElement, event)">X</button>
+                </div>
+            `;
+
+            flipCardGrid.insertAdjacentHTML('beforeend', newFlipCardHtml);
+
+            // Clear input fields
+            document.getElementById('frontContent').value = '';
+            document.getElementById('backContent').value = '';
+
+            // Adjust font size for the newly added card's back content
+            const newCardBackP = flipCardGrid.lastElementChild.querySelector('.flip-card-back p');
+            if (newCardBackP) {
+                adjustFontSize(newCardBackP);
+            }
+        }
+
+        // Function to delete a flip card
+        function deleteFlipCard(cardElement, event) {
+            event.stopPropagation();
+            cardElement.remove();
+        }
+
+        // Function to create and append slide navigation dots
+        function createSlideDots() {
+            slideNavDotsContainer.innerHTML = ''; // Clear existing dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('slide-dot');
+                dot.textContent = i + 1; // Display slide number (1-based)
+                dot.addEventListener('click', () => {
+                    showSlide(i); // Navigate to the clicked slide (0-based index)
+                });
+                slideNavDotsContainer.appendChild(dot);
+            }
+            updateSlideDots(); // Set initial active dot
+        }
+
+        // Function to update the active state of slide navigation dots
+        function updateSlideDots() {
+            const dots = slideNavDotsContainer.querySelectorAll('.slide-dot');
+            dots.forEach((dot, i) => {
+                if (i === currentSlide) {
+                    dot.classList.add('active-dot');
+                } else {
+                    dot.classList.remove('active-dot');
+                }
+            });
+        }
+
+        // Initialize slideshow and dots
+        createSlideDots(); // Create dots when the page loads
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
