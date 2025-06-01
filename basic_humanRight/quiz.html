@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>초등학교 5학년 인권 퀴즈 슬라이드</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Jua', 'Malgun Gothic', sans-serif; /* Apply Jua font */
             background-color: #f0f4f8; /* Light blue-gray background */
             display: flex;
             justify-content: center;
@@ -23,7 +23,7 @@
             border-radius: 20px; /* More rounded corners */
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Softer shadow */
             padding: 30px;
-            max-width: 600px;
+            max-width: 1000px;
             width: 100%;
             text-align: center;
             display: flex;
@@ -34,8 +34,9 @@
             background-color: #e0f2fe; /* Lighter blue for question */
             border-radius: 15px;
             padding: 25px;
+            letter-spacing: 0.15em; /* 자간 3번 넓힘 */
             margin-bottom: 20px;
-            font-size: 1.25rem; /* Larger font for question */
+            font-size: 1.5rem; /* Larger font for question */
             font-weight: 600;
             color: #2c3e50; /* Darker text */
             text-align: left;
@@ -49,11 +50,12 @@
             background-color: #f8f9fa; /* Off-white for options */
             border: 2px solid #cbd5e1; /* Light gray border */
             border-radius: 10px;
+            letter-spacing: 0.15em; /* 자간 3번 넓힘 */
             padding: 15px 20px;
             text-align: left;
             cursor: pointer;
             transition: all 0.2s ease-in-out;
-            font-size: 1.1rem;
+            font-size: 1.5rem;
             color: #334155;
         }
         .option-button:hover:not(.selected):not(.correct):not(.incorrect) {
@@ -215,17 +217,6 @@
         // Quiz data
         const quizData = [
             {
-                question: "권리가 무엇인가요?",
-                options: [
-                    "특별한 사람만 가질 수 있는 힘",
-                    "무엇을 하거나 누릴 수 있는 힘이나 자격",
-                    "다른 사람에게 명령할 수 있는 능력",
-                    "돈으로 살 수 있는 것"
-                ],
-                correctAnswer: 1,
-                feedback: "권리는 우리가 무엇을 하거나 누릴 수 있는 힘이나 자격을 뜻해요. 모든 사람은 소중한 권리를 가지고 있답니다."
-            },
-            {
                 question: "인권은 무엇을 뜻할까요?",
                 options: [
                     "특별한 사람들만 누릴 수 있는 권리",
@@ -237,18 +228,7 @@
                 feedback: "인권은 사람이면 누구나 태어나면서부터 가지고 있는 소중한 권리예요. 특별한 사람만 누릴 수 있는 것이 아니랍니다."
             },
             {
-                question: "인권은 누가 가지고 있을까요?",
-                options: [
-                    "대한민국 국민만 가지고 있어요.",
-                    "어른들만 가지고 있어요.",
-                    "남자만 가지고 있어요.",
-                    "세상의 모든 사람이 가지고 있어요."
-                ],
-                correctAnswer: 3,
-                feedback: "인권은 국적, 나이, 성별에 관계없이 세상의 모든 사람이 태어나면서부터 가지고 있는 권리입니다."
-            },
-            {
-                question: "우리에게 소중한 권리는 어떤 것일까요?",
+                question: "우리(아동)에게 소중한 권리는 어떤 것일까요?",
                 options: [
                     "차별받지 않을 권리",
                     "잘 살 권리 (생존권)",
@@ -282,18 +262,7 @@
                 feedback: "인권은 모두에게 공평하게 적용되어야 해요. 친구들과 번갈아 타거나, 함께 즐길 수 있는 다른 놀이를 찾는 것이 인권을 존중하는 방법이에요."
             },
             {
-                question: "우리가 인권을 보호하기 위해 할 수 있는 일은 무엇일까요?",
-                options: [
-                    "다른 사람의 인권에는 신경 쓰지 않아요.",
-                    "나쁜 행동을 하는 사람을 보고도 모른 척해요.",
-                    "다른 사람의 생각과 다름을 존중하고, 차별하지 않으며, 어려움에 처한 친구를 도와줘요.",
-                    "내 권리만 중요하게 생각해요."
-                ],
-                correctAnswer: 2,
-                feedback: "다른 사람의 생각과 다름을 존중하고, 차별하지 않으며, 어려움에 처한 친구를 돕는 것이 인권을 보호하는 가장 좋은 방법이에요. 작은 행동들이 모여 큰 변화를 만든답니다."
-            },
-            {
-                question: "몸이 조금 불편한 친구가 있어요. 이 친구의 인권을 지키기 위해 우리가 할 수 있는 일은 무엇일까요?",
+                question: "다리를 다친 친구가 있어요. 이 친구의 인권을 지키기 위해 우리가 할 수 있는 일은 무엇일까요?",
                 options: [
                     "그 친구를 특별하게 대하지 않고 무시해요.",
                     "그 친구를 다른 친구들과 어울리지 못하게 해요.",
